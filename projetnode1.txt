@@ -1,0 +1,225 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  mar. 24 déc. 2019 à 02:51
+-- Version du serveur :  5.7.19
+-- Version de PHP :  7.1.9
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données :  `projetnode`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `choix`
+--
+
+DROP TABLE IF EXISTS `choix`;
+CREATE TABLE IF NOT EXISTS `choix` (
+  `idChoix` int(11) NOT NULL AUTO_INCREMENT,
+  `choix` varchar(50) NOT NULL,
+  PRIMARY KEY (`idChoix`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `choix`
+--
+
+INSERT INTO `choix` (`idChoix`, `choix`) VALUES
+(1, 'Mère'),
+(2, 'Père'),
+(3, 'Enfant'),
+(4, 'Grand-parent'),
+(5, 'Autre'),
+(6, '1'),
+(7, '2'),
+(8, '3'),
+(9, 'plus'),
+(10, 'Moi'),
+(11, 'Mon/ma partenaire'),
+(12, 'Parents'),
+(13, 'Ensemble'),
+(14, 'Séparément'),
+(15, 'Oui'),
+(16, 'Non'),
+(17, 'Nous n avons pas d animaux'),
+(18, 'Parfois ensemble, parfois séparément'),
+(19, 'Femme'),
+(20, 'Homme');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `choixquestion`
+--
+
+DROP TABLE IF EXISTS `choixquestion`;
+CREATE TABLE IF NOT EXISTS `choixquestion` (
+  `idcq` int(11) NOT NULL AUTO_INCREMENT,
+  `idquestion` int(11) NOT NULL,
+  `idchoix` int(11) NOT NULL,
+  PRIMARY KEY (`idcq`),
+  KEY `idquestion` (`idquestion`),
+  KEY `idchoix` (`idchoix`)
+) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `choixquestion`
+--
+
+INSERT INTO `choixquestion` (`idcq`, `idquestion`, `idchoix`) VALUES
+(1, 2, 1),
+(2, 2, 2),
+(3, 2, 3),
+(4, 2, 4),
+(5, 2, 5),
+(6, 3, 6),
+(7, 3, 7),
+(8, 3, 8),
+(9, 3, 9),
+(10, 4, 10),
+(11, 4, 11),
+(12, 4, 12),
+(13, 4, 5),
+(14, 5, 13),
+(15, 5, 14),
+(16, 6, 10),
+(17, 6, 11),
+(18, 6, 12),
+(19, 6, 3),
+(20, 6, 5),
+(21, 7, 10),
+(22, 7, 11),
+(23, 7, 12),
+(24, 7, 3),
+(25, 7, 5),
+(26, 8, 15),
+(27, 8, 16),
+(28, 9, 13),
+(29, 9, 14),
+(30, 10, 10),
+(31, 10, 11),
+(32, 10, 12),
+(33, 10, 3),
+(34, 10, 17),
+(35, 10, 5),
+(36, 11, 13),
+(37, 11, 14),
+(38, 11, 18),
+(39, 12, 10),
+(40, 12, 11),
+(41, 12, 12),
+(42, 12, 5),
+(43, 13, 19),
+(44, 13, 20);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `question`
+--
+
+DROP TABLE IF EXISTS `question`;
+CREATE TABLE IF NOT EXISTS `question` (
+  `idQuestion` int(11) NOT NULL,
+  `texte` text NOT NULL,
+  PRIMARY KEY (`idQuestion`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `question`
+--
+
+INSERT INTO `question` (`idQuestion`, `texte`) VALUES
+(1, 'Combien de personnes compte votre foyer ?'),
+(2, 'Quel est votre rôle au sein de votre foyer ?'),
+(3, 'Combien de personnes dans votre foyer ont une source stable de revenu ?'),
+(4, 'Qui paye habituellement les factures ?'),
+(5, 'Comment mangez-vous le plat principal de la journée ?'),
+(6, 'Qui fait habituellement la cuisine dans votre foyer ?'),
+(7, 'Qui fait habituellement le ménage dans votre foyer ?'),
+(8, 'Organisez-vous des rassemblements dans votre foyer ?'),
+(9, 'Comment regardez-vous habituellement des films dans votre foyer ?'),
+(10, 'Qui s occupe le plus souvent des animaux?'),
+(11, 'Comment les membres de votre foyer passent-ils habituellement leur temps libre ?'),
+(12, 'Qui paye habituellement pour l entretien du foyer ?'),
+(13, 'Vous êtes ...');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reponce`
+--
+
+DROP TABLE IF EXISTS `reponce`;
+CREATE TABLE IF NOT EXISTS `reponce` (
+  `idReponce` int(11) NOT NULL AUTO_INCREMENT,
+  `idQuestion` int(11) NOT NULL,
+  `reponce` text NOT NULL,
+  `idUtilisateur` int(11) NOT NULL,
+  PRIMARY KEY (`idReponce`),
+  KEY `idQuestion` (`idQuestion`),
+  KEY `idUtilisateur` (`idUtilisateur`)
+) ENGINE=MyISAM AUTO_INCREMENT=286 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `reponce`
+--
+
+INSERT INTO `reponce` (`idReponce`, `idQuestion`, `reponce`, `idUtilisateur`) VALUES
+(285, 13, 'Femme', 33),
+(284, 10, 'Enfant', 33),
+(283, 12, 'Mon/ma partenaire', 33),
+(282, 4, 'Mon/ma partenaire', 33),
+(281, 7, 'Moi', 33),
+(280, 6, 'Mon/ma partenaire', 33),
+(279, 2, 'Mère', 33),
+(278, 8, 'Oui', 33),
+(277, 9, 'Séparément', 33),
+(276, 5, 'Ensemble', 33),
+(275, 11, 'Séparément', 33),
+(274, 3, '3', 33);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateur`
+--
+
+DROP TABLE IF EXISTS `utilisateur`;
+CREATE TABLE IF NOT EXISTS `utilisateur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(60) NOT NULL,
+  `var` tinyint(1) NOT NULL,
+  `mdp` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `username`, `email`, `var`, `mdp`) VALUES
+(33, 'hejer', 'hejer@gmail.com', 1, 'hejer'),
+(29, 'bahe', 'bahe@gmail.com', 1, 'bahe'),
+(32, 'rania', 'raniabelarbi70@gmail.com', 1, 'rania');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
